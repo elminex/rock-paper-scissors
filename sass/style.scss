@@ -8,6 +8,7 @@ body {
     background: #fff url('https://images.pexels.com/photos/1249214/pexels-photo-1249214.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940') no-repeat center;
     max-height: 500px;
     padding: 50px;
+    width: 100%;
     margin-bottom: 30px;
     text-align: center;
     &__heading {
@@ -52,8 +53,15 @@ body {
         border-top: 2px solid #000;
         border-bottom: 2px solid #000;
         padding: 30px 0;
-        font-size: 3rem;
+        font-size: 1rem;
         width: 29%;
         background-color: #fff;
+    }
+    &__new-game-wrap {
+        padding: 30px 0;
+        width: 100%;
+    }
+    &__score {
+        font-size: 3rem;
     }
 }
