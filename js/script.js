@@ -8,6 +8,7 @@ var computerPoints = 0;
 var playerPoints = 0;
 var winPoints;
 var gameReady = 'start';
+
 var winConditionLog = function(text) {
     var winPointsOutput = document.getElementById('win-condition');
     winPointsOutput.innerHTML = text;
@@ -22,8 +23,11 @@ var endGame = function() {
     playerPoints = 0;
     winConditionLog("");
     winPoints = undefined;
-    gameReady = 'end';
+    setTimeout(function() {
+        gameReady = 'end';
+    }, 0);
 }
+
 var pointsLog = function(player, computer) {
     var scoreBoard = document.getElementById('game-score');
     var score = player + ' - ' + computer;
@@ -31,59 +35,41 @@ var pointsLog = function(player, computer) {
 };
 
 var scoreCheck = function(player, computer) {
-    if (player == winPoints) {
+    if (player === winPoints) {
         gameLog('You win! Game over');
         endGame();
     }
-    if (computer == winPoints) { 
+    if (computer === winPoints) { 
         gameLog('You lose! Game over');
-        endGame();
+       endGame();
     };
 };
 
-paperInput.addEventListener('click', function(){
-    console.log(gameReady);
-    if(gameReady === 'started') {
-        playerSelection = 'paper';
-        playerMove(playerSelection);
+paperInput.addEventListener('click', function() {
+    buttonValue('paper')
+});
+rockInput.addEventListener('click', function() {
+    buttonValue('rock')
+});
+scissorsInput.addEventListener('click', function() {
+    buttonValue('scissors')
+});
+
+var buttonValue = function(selection) {
+    if(gameReady === 'started'){
+        playerMove(selection);
     }
     if(gameReady === 'start') {
         gameLog('Please start the game by clicking the "New game" button')
     }
     if(gameReady === 'end') {
         gameLog('Game over, please press the "New game" button to start again.')
-    }
-});
-
-rockInput.addEventListener('click', function(){
-    if (gameReady === 'started') {
-        playerSelection = 'rock';
-        playerMove(playerSelection);
-    }
-    if (gameReady === 'start') {
-        gameLog('Please start the game by clicking the "New game" button')
-    }
-    if(gameReady === 'end') {
-        gameLog('Game over, please press the "New game" button to start again.')
-    }
-});
-
-scissorsInput.addEventListener('click', function(){
-    if(gameReady === 'started') {
-        playerSelection = 'scissors';
-        playerMove(playerSelection);
-    }
-    if(gameReady === 'start') {
-        gameLog('Please start the game by clicking the "New game" button')
-    }
-    if(gameReady === 'end') {
-        gameLog('Game over, please press the "New game" button to start again.')
-    }
-});
+    };
+};
 
 gameLog('Press "New game" to start');
 pointsLog(0, 0);
-var playerMove = function(playerMove) {
+var playerMove = function(playerValue) {
     var computerRandom = Math.floor(Math.random() * 3) + 1;
     var computerMove;
     if(computerRandom == 1) {
@@ -95,36 +81,36 @@ var playerMove = function(playerMove) {
     else {
         computerMove = 'scissors';
     }
-    if(playerMove == computerMove) {
-        gameLog('Draw! You both played ' + playerMove + '.<br><br>Next round.<br>Select "Rock", "Papper" or "Sciccors" and press the apropriate button.');
+    if(playerValue == computerMove) {
+        gameLog('Draw! You both played ' + playerValue + '.<br><br>Next round.<br>Select "Rock", "Papper" or "Sciccors" and press the apropriate button.');
     }
-    else if(playerMove == 'rock') {
+    else if(playerValue == 'rock') {
         if(computerMove == 'paper'){
-            gameLog('You lose!<br>You played ' + playerMove + ' while computer played ' + computerMove + '.<br><br>Next round.<br>Select "Rock", "Papper" or "Sciccors" and press the apropriate button.');
+            gameLog('You lose!<br>You played ' + playerValue + ' while computer played ' + computerMove + '.<br><br>Next round.<br>Select "Rock", "Papper" or "Sciccors" and press the apropriate button.');
             computerPoints++;
         }
         else {
-            gameLog('You win!<br>You played ' + playerMove + ' while computer played ' + computerMove + '.<br><br>Next round.<br>Select "Rock", "Papper" or "Sciccors" and press the apropriate button.');
+            gameLog('You win!<br>You played ' + playerValue + ' while computer played ' + computerMove + '.<br><br>Next round.<br>Select "Rock", "Papper" or "Sciccors" and press the apropriate button.');
             playerPoints++;
         }
     }
-    else if(playerMove == 'scissors') {
+    else if(playerValue == 'scissors') {
         if(computerMove == 'paper'){
-            gameLog('You win!<br>You played ' + playerMove + ' while computer played ' + computerMove + '.<br><br>Next round.<br>Select "Rock", "Papper" or "Sciccors" and press the apropriate button.');
+            gameLog('You win!<br>You played ' + playerValue + ' while computer played ' + computerMove + '.<br><br>Next round.<br>Select "Rock", "Papper" or "Sciccors" and press the apropriate button.');
             playerPoints++;
         }
         else {
-            gameLog('You lose!<br>You played ' + playerMove + ' while computer played ' + computerMove + '.<br><br>Next round.<br>Select "Rock", "Papper" or "Sciccors" and press the apropriate button.');
+            gameLog('You lose!<br>You played ' + playerValuee + ' while computer played ' + computerMove + '.<br><br>Next round.<br>Select "Rock", "Papper" or "Sciccors" and press the apropriate button.');
             computerPoints++;
         }
     }
-    else if(playerMove == 'paper') {
+    else if(playerValue == 'paper') {
         if(computerMove == 'scissors') {
-            gameLog('You lose!<br>You played ' + playerMove + ' while computer played ' + computerMove + '.<br><br>Next round.<br>Select "Rock", "Papper" or "Sciccors" and press the apropriate button.');
+            gameLog('You lose!<br>You played ' + playerValue + ' while computer played ' + computerMove + '.<br><br>Next round.<br>Select "Rock", "Papper" or "Sciccors" and press the apropriate button.');
             computerPoints++;
         }
         else {
-            gameLog('You win!<br>You played ' + playerMove + ' while computer played ' + computerMove + '.<br><br>Next round.<br>Select "Rock", "Papper" or "Sciccors" and press the apropriate button.');
+            gameLog('You win!<br>You played ' + playerValue + ' while computer played ' + computerMove + '.<br><br>Next round.<br>Select "Rock", "Papper" or "Sciccors" and press the apropriate button.');
             playerPoints++;
         }
     }

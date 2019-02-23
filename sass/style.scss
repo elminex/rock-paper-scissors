@@ -5,9 +5,9 @@ body {
 }
 
 .title {
-    background: #fff url('https://images.pexels.com/photos/1249214/pexels-photo-1249214.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940') no-repeat center;
+    background: #fff url('https://images.pexels.com/photos/1249214/pexels-photo-1249214.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940') center/cover no-repeat ;
     max-height: 500px;
-    padding: 50px;
+    padding: 50px 0;
     width: 100%;
     margin-bottom: 30px;
     text-align: center;
@@ -45,23 +45,24 @@ body {
         background-color: white;
         text-align: center;
         width: 69%;
-        padding: 30px 0;
+        padding: 20px 0;
         border: 2px solid #000;
     }
     &__result {
         border-left: 2px solid #000;
         border-top: 2px solid #000;
         border-bottom: 2px solid #000;
-        padding: 30px 0;
+        padding: 20px 0;
         font-size: 1rem;
         width: 29%;
         background-color: #fff;
     }
     &__new-game-wrap {
-        padding: 30px 0;
+        padding: 20px 0;
         width: 100%;
     }
     &__score {
         font-size: 3rem;
+        margin: 0;
     }
 }
