@@ -46,13 +46,25 @@ var buttonValue = function(selection) {
         gameLog('Game over, please press the "New game" button to start again.')
     };
 };
-
+var computerMove;
+var computerRandom = function() {
+    var randomNumber = Math.floor(Math.random() * 3) + 1;
+    
+    if(randomNumber == 1) {
+        computerMove = 'paper';
+    }
+    else if(randomNumber == 2) {
+        computerMove = 'rock';
+    }
+    else {
+        computerMove = 'scissors';
+    }
+}
 
 gameLog('Press "New game" to start');
 pointsLog(playerPoints, computerPoints);
-var playerMove = function(playerValue) {
+var playerMove = function(playerValue, computerMove) {
     var computerRandom = Math.floor(Math.random() * 3) + 1;
-    var computerMove;
     if(computerRandom == 1) {
         computerMove = 'paper';
     }
@@ -106,7 +118,7 @@ newGame.addEventListener('click', function(){
     winPoints = window.prompt('Enter score needed to win');
     winPoints = Math.abs(parseInt(winPoints, 10));
     if(typeof winPoints === 'number' && !isNaN(winPoints)) {
-        winConditionLog('You need ' + winPoints + ' points to win.');
+        winConditionLog('Firs to ' + winPoints + ' points wins.');
         gameLog('Select "Rock", "Papper" or "Sciccors" and press the apropriate button.');
         computerPoints = 0;
         playerPoints = 0;
