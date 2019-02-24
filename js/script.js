@@ -9,24 +9,10 @@ var playerPoints = 0;
 var winPoints;
 var gameReady = 'start';
 
-var winConditionLog = function(text) {
-    var winPointsOutput = document.getElementById('win-condition');
-    winPointsOutput.innerHTML = text;
-}
 var gameLog = function(text){
     var output = document.getElementById('output');
     output.innerHTML = text;
 };
-
-var endGame = function() {
-    computerPoints = 0;
-    playerPoints = 0;
-    winConditionLog("");
-    winPoints = undefined;
-    setTimeout(function() {
-        gameReady = 'end';
-    }, 0);
-}
 
 var pointsLog = function(player, computer) {
     var scoreBoard = document.getElementById('game-score');
@@ -34,15 +20,9 @@ var pointsLog = function(player, computer) {
     scoreBoard.innerHTML = score;
 };
 
-var scoreCheck = function(player, computer) {
-    if (player === winPoints) {
-        gameLog('You win! Game over');
-        endGame();
-    }
-    if (computer === winPoints) { 
-        gameLog('You lose! Game over');
-       endGame();
-    };
+var winConditionLog = function(text) {
+    var winPointsOutput = document.getElementById('win-condition');
+    winPointsOutput.innerHTML = text;
 };
 
 paperInput.addEventListener('click', function() {
@@ -67,8 +47,9 @@ var buttonValue = function(selection) {
     };
 };
 
+
 gameLog('Press "New game" to start');
-pointsLog(0, 0);
+pointsLog(playerPoints, computerPoints);
 var playerMove = function(playerValue) {
     var computerRandom = Math.floor(Math.random() * 3) + 1;
     var computerMove;
@@ -84,38 +65,41 @@ var playerMove = function(playerValue) {
     if(playerValue == computerMove) {
         gameLog('Draw! You both played ' + playerValue + '.<br><br>Next round.<br>Select "Rock", "Papper" or "Sciccors" and press the apropriate button.');
     }
-    else if(playerValue == 'rock') {
-        if(computerMove == 'paper'){
-            gameLog('You lose!<br>You played ' + playerValue + ' while computer played ' + computerMove + '.<br><br>Next round.<br>Select "Rock", "Papper" or "Sciccors" and press the apropriate button.');
-            computerPoints++;
-        }
-        else {
-            gameLog('You win!<br>You played ' + playerValue + ' while computer played ' + computerMove + '.<br><br>Next round.<br>Select "Rock", "Papper" or "Sciccors" and press the apropriate button.');
-            playerPoints++;
-        }
+    else if ((playerValue == 'rock' && computerMove == 'scissors') || (playerValue == 'scissors' && computerMove =='paper') || (playerValue == 'paper' && computerMove == "rock")) {
+        playerPoints++;
+        winLoseMsg('win', playerValue, computerMove);
     }
-    else if(playerValue == 'scissors') {
-        if(computerMove == 'paper'){
-            gameLog('You win!<br>You played ' + playerValue + ' while computer played ' + computerMove + '.<br><br>Next round.<br>Select "Rock", "Papper" or "Sciccors" and press the apropriate button.');
-            playerPoints++;
-        }
-        else {
-            gameLog('You lose!<br>You played ' + playerValuee + ' while computer played ' + computerMove + '.<br><br>Next round.<br>Select "Rock", "Papper" or "Sciccors" and press the apropriate button.');
-            computerPoints++;
-        }
-    }
-    else if(playerValue == 'paper') {
-        if(computerMove == 'scissors') {
-            gameLog('You lose!<br>You played ' + playerValue + ' while computer played ' + computerMove + '.<br><br>Next round.<br>Select "Rock", "Papper" or "Sciccors" and press the apropriate button.');
-            computerPoints++;
-        }
-        else {
-            gameLog('You win!<br>You played ' + playerValue + ' while computer played ' + computerMove + '.<br><br>Next round.<br>Select "Rock", "Papper" or "Sciccors" and press the apropriate button.');
-            playerPoints++;
-        }
+    else {
+        computerPoints++;
+        winLoseMsg('lose', playerValue, computerMove);
     }
     pointsLog(playerPoints, computerPoints);
     scoreCheck(playerPoints, computerPoints);
+};
+
+var winLoseMsg = function(result, playerValue, computerValue) {
+    gameLog('You ' + result + ' !<br>You played ' + playerValue + ' while computer played ' + computerValue + '.<br><br>Next round.<br>Select "Rock", "Papper" or "Scissors" and press the apropriate button.')
+}
+
+var scoreCheck = function(player, computer) {
+    if (player === winPoints) {
+        gameLog('<strong>You win</strong>!<br>You are awesome and beat the super-inteligent AI!<br><br>Press the "New game" button to play again!');
+        endGame();
+    }
+    if (computer === winPoints) { 
+        gameLog('<strong>You lose!</strong><br>The super-inteligent AI has yet again proven to be the best.<br><br>Press the "New game" button to play again!');
+        endGame();
+    };
+};
+
+var endGame = function() {
+    computerPoints = 0;
+    playerPoints = 0;
+    winConditionLog("");
+    winPoints = undefined;
+    setTimeout(function() {
+        gameReady = 'end';
+    }, 0);
 };
 
 newGame.addEventListener('click', function(){
@@ -124,7 +108,9 @@ newGame.addEventListener('click', function(){
     if(typeof winPoints === 'number' && !isNaN(winPoints)) {
         winConditionLog('You need ' + winPoints + ' points to win.');
         gameLog('Select "Rock", "Papper" or "Sciccors" and press the apropriate button.');
-        pointsLog(0, 0);
+        computerPoints = 0;
+        playerPoints = 0;
+        pointsLog(playerPoints, computerPoints);
         gameReady = 'started';
     }
     else {
