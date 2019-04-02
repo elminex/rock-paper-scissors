@@ -27,6 +27,8 @@
   "devDependencies": {
     "autoprefixer-cli": "^1.0.0",
     "browser-sync": "^2.26.3",
+    "eslint": "^5.16.0",
+    "eslint-plugin-react": "^7.12.4",
     "globstar": "^1.0.0",
     "mkdirp": "^0.5.1",
     "node-sass": "^4.11.0",

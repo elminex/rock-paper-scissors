@@ -33,7 +33,17 @@
                 <h2>Game summary</h2>
                 <div class="modal__game-end-output" id="game-end-output"></div>
                 <div class="modal__game-end-table" id="table-output"></div>
-                <button id="close-modal">Close window</button>
+                <button class="modal__button" id="close-modal">Close window</button>
+            </div>
+        </div>
+        <div class="modal" id="game-start">
+            <div class="modal__game-start">
+                <h2>New game</h2>
+                <label class="modal__game-start-input" for="input-name">Enter your name
+                <input type="text" id="input-name" placeholder="Name"></label>
+                <label class="modal__game-start-input" for ="input-rounds">Enter score needed to win
+                <input type="number" id="input-rounds" placeholder="Enter number"></label>
+                <button class="modal__button" id="start-game">Go!</button>
             </div>
         </div>
         <script src="js/script.js"></script>
