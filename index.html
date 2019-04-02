@@ -14,9 +14,9 @@
         <div class="game">
             <h2 class="game__heading">Pick your choice:</h2>
             <div class="game__btn-wrap">
-                <button class="game__btn" id="btn-rock">Rock</button>
-                <button class="game__btn" id="btn-paper">Paper</button>
-                <button class="game__btn" id="btn-scissors">Scissors</button>
+                <button class="game__btn player-move" id="btn-rock" data-move="rock">Rock</button>
+                <button class="game__btn player-move" id="btn-paper" data-move="paper">Paper</button>
+                <button class="game__btn player-move" id="btn-scissors" data-move="scissors">Scissors</button>
             </div>
             <h2 class="game__heading">Results:</h2>
             <div class="game__result" id="result">
@@ -26,6 +26,14 @@
             <div class="game__output" id="output"></div>
             <div class="game__new-game-wrap">
                 <button class="game__btn" id="btn-new-game">New game</button>
+            </div>
+        </div>
+        <div class="modal" id="game-end">
+            <div class="modal__game-end">
+                <h2>Game summary</h2>
+                <div class="modal__game-end-output" id="game-end-output"></div>
+                <div class="modal__game-end-table" id="table-output"></div>
+                <button id="close-modal">Close window</button>
             </div>
         </div>
         <script src="js/script.js"></script>
