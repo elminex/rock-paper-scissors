@@ -1,6 +1,6 @@
 const newGame = document.getElementById('btn-new-game');
 const tableWrapper = document.getElementById('table-output');
-let params = {
+const params = {
     playerName: undefined,
     round: 0,
     computerMove: undefined,
@@ -12,11 +12,11 @@ let params = {
 }
 
 function createTable() {
-    let table = document.createElement('table');
+    const table = document.createElement('table');
     table.setAttribute('id', 'summary-table')
     tableWrapper.appendChild(table);
-    let tableLabels = ['Round nr', 'Player move', 'AI move', 'Round winner', 'Score'];
-    let tableHeaderRow = document.createElement('tr');
+    const tableLabels = ['Round nr', 'Player move', 'AI move', 'Round winner', 'Score'];
+    const tableHeaderRow = document.createElement('tr');
     table.appendChild(tableHeaderRow);
     for (let i = 0; i < tableLabels.length; i++) {
         let tableHeaderData = document.createElement('th');
@@ -26,7 +26,7 @@ function createTable() {
     for (let j = 0; j < params.progress.length; j++) {
         tableRow = document.createElement('tr');
         for (let key in params.progress[j]) {
-            let tableData = document.createElement('td');
+            const tableData = document.createElement('td');
             tableData.innerHTML = params.progress[j][key];
             tableRow.appendChild(tableData);
         }
@@ -40,23 +40,12 @@ let gameLog = function (text) {
 }
 
 let endLog = function(text) {
-    let modal = document.getElementById('game-end');
+    const modal = document.getElementById('game-end');
     modal.classList.add('show');
     createTable();
-    let modalOutput = document.getElementById('game-end-output');
+    const modalOutput = document.getElementById('game-end-output');
     modalOutput.innerHTML = text;
     closeModal(modal);
-}
-
-let pointsLog = function(player, computer) {
-    let score = player + ' - ' + computer;
-    const scoreBoard = document.getElementById('game-score');
-    scoreBoard.innerHTML = score;
-}
-
-let winConditionLog = function (text) {
-    const winPointsOutput = document.getElementById('win-condition');
-    winPointsOutput.innerHTML = text;
 }
 
 function closeModal(modal) {
@@ -77,15 +66,27 @@ function closeModal(modal) {
   
 function tableLog(playerValue, winner) {
     params.round++;
-    let newObject = {
+    const newObject = {
         nr: params.round,
         player: playerValue,
         computer: params.computerMove,
         roundWinner: winner,
-        score: params.playerPoints + ' - ' + params.computerPoints,
+        score: params.playerPoints + ' - ' + params.computerPoints
     }
     params.progress.push(newObject);
 }
+
+let pointsLog = function(player, computer) {
+    let score = player + ' - ' + computer;
+    const scoreBoard = document.getElementById('game-score');
+    scoreBoard.innerHTML = score;
+}
+
+let winConditionLog = function (text) {
+    const winPointsOutput = document.getElementById('win-condition');
+    winPointsOutput.innerHTML = text;
+}
+
 
 
 // Start screen
@@ -117,10 +118,9 @@ let buttonValue = function(selection) {
 
 let playerMove = function(playerValue) {
     computerRandom();
-    let winner;
+    let winner = 'draw';
     if(playerValue === params.computerMove) {
-        gameLog('Draw! Both ' + params.playerName + 'and the AI played ' + playerValue + '.<br><br>Next round.<br>Select "Rock", "Papper" or "Sciccors" and press the apropriate button.');
-        winner = 'draw';
+        gameLog('Draw! Both ' + params.playerName + ' and the AI played ' + playerValue + '.<br><br>Next round.<br>Select "Rock", "Papper" or "Sciccors" and press the apropriate button.');
     }
     else if((playerValue === 'rock' && params.computerMove === 'scissors') || (playerValue === 'scissors' && params.computerMove === 'paper') || (playerValue === 'paper' && params.computerMove === "rock")) {
         params.playerPoints++;
@@ -183,13 +183,13 @@ newGame.addEventListener('click', function () {
         tableWrapper.childNodes[0].remove();
     }
     params.progress = [];
-    let modal = document.getElementById('game-start');
+    const modal = document.getElementById('game-start');
     modal.classList.add('show');
     startGame(modal);
 })
 
 function startGame(modal) {
-    let startGame = document.getElementById('start-game');
+    const startGame = document.getElementById('start-game-btn');
     closeModal(modal);
     startGame.addEventListener('click', function () {
         params.playerName = document.getElementById('input-name').value;
