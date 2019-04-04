@@ -13,7 +13,6 @@ const params = {
 
 function createTable() {
     const table = document.createElement('table');
-    table.setAttribute('id', 'summary-table')
     tableWrapper.appendChild(table);
     const tableLabels = ['Round nr', 'Player move', 'AI move', 'Round winner', 'Score'];
     const tableHeaderRow = document.createElement('tr');
