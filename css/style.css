@@ -46,8 +46,7 @@ body { margin: 0; padding: 0; background-color: #f4f4f4; }
 
 @media (min-width: 678px) { .title { padding: 50px 0 30px; margin-bottom: 30px; }
   .title__heading { font-size: 4rem; margin: 0 0 80px; }
-  .title__desc { font-size: 2rem; }
-  .game__btn-wrap { display: -ms-flexbox; display: flex; -ms-flex-pack: distribute; justify-content: space-around; width: 100%; }
+  .title__desc { font-size: 3rem; }
   .game__btn { width: 200px; padding: 20px; font-size: 2rem; }
   .game__score { font-size: 3rem; }
   .game__output { font-size: 1.3rem; }
